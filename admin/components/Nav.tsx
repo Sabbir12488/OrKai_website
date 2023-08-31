@@ -11,7 +11,7 @@ const Nav = () => {
 
   return (
     <aside className="text-white p-4 pr-0">
-      <Link href={"/"} className="flex gap-2 mb-5 mr-4">
+      <Link href={"/"} className="flex gap-2 mb-5 mr-5">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
