@@ -16,23 +16,17 @@ const NewProducts = () => {
   const [description, setDescription] = useState<string>("");
   const [price, setPrice] = useState<number>(0);
 
-  async function creatProduct() {
+  async function creatProduct(ev: React.FormEvent<HTMLFormElement>) {
+    ev.preventDefault();
+
     // create a product object with the state values
-    const product: Product = { title, description, price };
-    try {
-      // await the response from the server
-      const response = await axios.post("/api/products", product);
-      // do something with the response, such as displaying a success message
-      console.log(response.data);
-    } catch (error) {
-      // handle the error, such as displaying an error message
-      console.error(error);
-    }
+    const data: Product = { title, description, price };
+    await axios.post("/api/products", data);
   }
 
   return (
     <Layout>
-      <form onSubmit={() => creatProduct()}>
+      <form onSubmit={creatProduct}>
         <h1>New Product</h1>
         <label>Product name</label>
         <input
