@@ -1,10 +1,19 @@
-import { Schema, model } from "mongoose"
+import { Schema, model } from "mongoose";
 
-const ProductSchema = new Schema({
-    title: {type: String, require: true},
+// Define an interface for the product document
+interface IProduct {
+    title: string;
+    description: string;
+    price: number;
+}
+
+// Create a schema for the product document
+const ProductSchema = new Schema<IProduct>({
+    title: String,
     description: String,
-    price: {type: Number, require: true}
+    price: Number,
 });
 
-const Product = model('Product', ProductSchema);
+// Create a model for the product document
+const Product = model<IProduct>('Product', ProductSchema);
 

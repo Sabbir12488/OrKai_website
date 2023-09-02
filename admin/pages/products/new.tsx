@@ -1,7 +1,6 @@
 import Layout from "@/components/Layout";
 import axios from "axios";
 import React, { useState } from "react";
-import { EventHandler } from "react";
 
 // define an interface for the product data
 interface Product {
@@ -21,6 +20,7 @@ const NewProducts = () => {
 
     // create a product object with the state values
     const data: Product = { title, description, price };
+    console.log("gello");
     await axios.post("/api/products", data);
   }
 

@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-export function mongooseConnect(){
+export default function mongooseConnect(){
    
     if(mongoose.connection.readyState == 1){
         return mongoose.connection.asPromise();
@@ -9,3 +9,4 @@ export function mongooseConnect(){
         return mongoose.connect(uri)
     }
 }
+
