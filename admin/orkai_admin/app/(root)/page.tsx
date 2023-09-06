@@ -1,5 +1,6 @@
 "use client";
 
+import { Model } from "@/components/ui/model";
 import { UseStoreModel } from "@/hooks/use-store-model";
 
 import { useEffect } from "react";

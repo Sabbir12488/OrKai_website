@@ -72,6 +72,7 @@ body,
   }
 }*/
 
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -93,9 +94,9 @@ body,
     --border: 20 5.9% 90%;
     --input: 20 5.9% 90%;
     --ring: 20 14.3% 4.1%;
-    --radius: 0.75rem;
+    --radius: 0rem;
   }
-
+ 
   .dark {
     --background: 20 14.3% 4.1%;
     --foreground: 60 9.1% 97.8%;
@@ -118,6 +119,7 @@ body,
     --ring: 35.5 91.7% 32.9%;
   }
 }
+
 
 @layer base {
   * {
