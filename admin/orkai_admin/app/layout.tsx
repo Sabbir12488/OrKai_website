@@ -6,6 +6,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 
 import { ModelProvider } from "@/providers/model-provider";
 
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
