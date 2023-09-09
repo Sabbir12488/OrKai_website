@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import axios from "axios";
+import { toast } from "react-hot-toast";
 
 import { UseStoreModel } from "@/hooks/use-store-model";
 import { Model } from "../ui/model";
@@ -39,11 +40,11 @@ export const StoreModel = () => {
     try {
       setLoading(true);
 
-      const response = await axios.post('/api/stores', values);
+      const response = await axios.post("/api/stores", values);
 
-      console.log(response.data);
+      toast.success("Store created!!");
     } catch (error) {
-      console.log(error);
+      toast.error("Something is wrong");
     } finally {
       setLoading(false);
     }
