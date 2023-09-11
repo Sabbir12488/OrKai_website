@@ -19,6 +19,11 @@ import {
   FormMessage,
 } from "./ui/form";
 import { Input } from "@/components/ui/input";
+import toast from "react-hot-toast";
+import axios from "axios";
+import { useParams, useRouter } from "next/navigation";
+import { AlartModel } from "@/components/models/alart-model";
+import { ApiAlart } from "@/components/ui/api-alart";
 
 interface settingFormPorps {
   intialData: store;
@@ -31,6 +36,8 @@ const formSchema = z.object({
 type settingsFormValues = z.infer<typeof formSchema>;
 
 export const SettingsForm: React.FC<settingFormPorps> = ({ intialData }) => {
+  const params = useParams();
+  const router = useRouter();
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -40,21 +47,51 @@ export const SettingsForm: React.FC<settingFormPorps> = ({ intialData }) => {
   });
 
   const onSubmit = async (values: settingsFormValues) => {
-    console.log(values);
+    try {
+      setLoading(true);
+      await axios.patch(`/api/stores/${params.storeId}`, values);
+      router.refresh();
+      toast.success("Changes saved!");
+    } catch (error) {
+      toast.error("Something went wrong.");
+    } finally {
+      setLoading(false);
+    }
   };
+
+const onDelete = async () => {
+  try{
+    setLoading(true);
+    await axios.delete(`/api/stores/${params.storeId}`)
+    router.refresh();
+    router.push('/')
+    toast.success('Store deleted.');
+  }catch (error){
+    toast.error("Make sure you remove all items from the store first.");
+  }finally{
+    setLoading(false);
+  }
+}
 
   return (
     <>
+      <AlartModel
+        isOpen={open}
+        onClose={() => setOpen(false)}
+        onConfirm={onDelete}
+        loading={loading}
+      />
       <div className="flex items-center justify-between">
         <Heading title="Settings" description="Manage store preferences" />
 
         <Button
           disabled={loading}
           variant={"destructive"}
-          size={"icon"}
+          size={"sm"}
           onClick={() => setOpen(true)}
         >
-          <Trash className="h-4" />
+          Delete
+          <Trash className="h-4 mr-0 ml-2" />
         </Button>
       </div>
       <Separator />
@@ -88,6 +125,8 @@ export const SettingsForm: React.FC<settingFormPorps> = ({ intialData }) => {
           </Button>
         </form>
       </Form>
+      <Separator/>
+      <ApiAlart title="test" description="test description" />
     </>
   );
 };
