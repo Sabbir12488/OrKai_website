@@ -24,6 +24,7 @@ import axios from "axios";
 import { useParams, useRouter } from "next/navigation";
 import { AlartModel } from "@/components/models/alart-model";
 import { ApiAlart } from "@/components/ui/api-alart";
+import { useOrigine } from "@/hooks/use-origin";
 
 interface settingFormPorps {
   intialData: store;
@@ -40,6 +41,7 @@ export const SettingsForm: React.FC<settingFormPorps> = ({ intialData }) => {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const origin = useOrigine();
 
   const form = useForm<settingsFormValues>({
     resolver: zodResolver(formSchema),
@@ -126,7 +128,11 @@ export const SettingsForm: React.FC<settingFormPorps> = ({ intialData }) => {
         </form>
       </Form>
       <Separator />
-      <ApiAlart title="NEXT_PUBLIC_API" description="test description" variant="public" />
+      <ApiAlart
+        title="NEXT_PUBLIC_API"
+        description={`${origin}/api/${params.storeId}`}
+        variant="public"
+      />
     </>
   );
 };
