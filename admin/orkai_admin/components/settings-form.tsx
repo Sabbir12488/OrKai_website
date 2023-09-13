@@ -59,19 +59,19 @@ export const SettingsForm: React.FC<settingFormPorps> = ({ intialData }) => {
     }
   };
 
-const onDelete = async () => {
-  try{
-    setLoading(true);
-    await axios.delete(`/api/stores/${params.storeId}`)
-    router.refresh();
-    router.push('/')
-    toast.success('Store deleted.');
-  }catch (error){
-    toast.error("Make sure you remove all items from the store first.");
-  }finally{
-    setLoading(false);
-  }
-}
+  const onDelete = async () => {
+    try {
+      setLoading(true);
+      await axios.delete(`/api/stores/${params.storeId}`);
+      router.refresh();
+      router.push("/");
+      toast.success("Store deleted.");
+    } catch (error) {
+      toast.error("Make sure you remove all items from the store first.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <>
@@ -125,8 +125,8 @@ const onDelete = async () => {
           </Button>
         </form>
       </Form>
-      <Separator/>
-      <ApiAlart title="test" description="test description" />
+      <Separator />
+      <ApiAlart title="NEXT_PUBLIC_API" description="test description" variant="public" />
     </>
   );
 };
