@@ -10,7 +10,7 @@ export function MainNav({
   ...props
 }: React.HTMLAttributes<HTMLElement>) {
   const pathName = usePathname();
-  const params = useParams();
+  const params = useParams(); //something
 
   const routes = [
     {
