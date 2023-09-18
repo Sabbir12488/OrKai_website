@@ -34,7 +34,7 @@ const formSchema = z.object({
   name: z.string().min(1),
 });
 
-type settingsFormValues = z.infer<typeof formSchema>; //something
+type settingsFormValues = z.infer<typeof formSchema>; //somethings
 
 export const SettingsForm: React.FC<settingFormPorps> = ({ intialData }) => {
   const params = useParams();
