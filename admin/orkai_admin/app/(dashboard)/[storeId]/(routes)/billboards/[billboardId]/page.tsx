@@ -15,4 +15,4 @@ const BillboardPage = async ({
   return <div>This is a form for billboards: {billboard?.label}</div>;
 };
 
-export default BillboardPage;
+export default BillboardPage; // adsd
