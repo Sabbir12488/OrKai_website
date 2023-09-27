@@ -24,7 +24,7 @@ export async function GET(
         console.log('[BILLBOARD_GET]', error); 
         return new NextResponse('Internal error', {status:500})
     }
-}
+};
 
 
 export async function PATCH(
@@ -121,4 +121,4 @@ export async function DELETE(
         console.log('[BILLBOARD_DELETE]', error); 
         return new NextResponse('Internal error', {status:500})
     }
-}
+};
