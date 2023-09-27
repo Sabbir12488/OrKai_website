@@ -25,6 +25,7 @@ import { useParams, useRouter } from "next/navigation";
 import { AlartModel } from "@/components/models/alart-model";
 import { ApiAlart } from "@/components/ui/api-alart";
 import { useOrigine } from "@/hooks/use-origin";
+import ImageUpload from "@/components/ui/image-upload";
 
 interface billboardFormPorps {
   intialData: Billboard | null;
@@ -47,8 +48,8 @@ export const BillboardForm: React.FC<billboardFormPorps> = ({ intialData }) => {
   const title = intialData ? "Edit billboard" : "New billboard";
   const description = intialData ? "Edit a billboard" : "Add a new billboard";
   const toastMessage = intialData
-    ? "Billboard updated"
-    : "New billboard created";
+    ? "Billboard updated."
+    : "New billboard created.";
   const action = intialData ? "Save" : "Create";
 
   const form = useForm<billboardFormValues>({
@@ -62,9 +63,14 @@ export const BillboardForm: React.FC<billboardFormPorps> = ({ intialData }) => {
   const onSubmit = async (values: billboardFormValues) => {
     try {
       setLoading(true);
-      await axios.patch(`/api/stores/${params.storeId}`, values);
+      if(intialData) {
+        await axios.patch(`/api/${params.storeId}/billboards/${params.billboardId}`, values);
+      }else{
+        await axios.post(`/api/${params.storeId}/billboards`, values);
+      }
+      
       router.refresh();
-      toast.success("Changes saved!");
+      toast.success(toastMessage);
     } catch (error) {
       toast.error("Something went wrong.");
     } finally {
@@ -75,12 +81,12 @@ export const BillboardForm: React.FC<billboardFormPorps> = ({ intialData }) => {
   const onDelete = async () => {
     try {
       setLoading(true);
-      await axios.delete(`/api/stores/${params.storeId}`);
+      await axios.delete(`/api/${params.storeId}/billboards/${params.billboardId}`);
       router.refresh();
       router.push("/");
-      toast.success("Store deleted.");
+      toast.success("Billboard deleted.");
     } catch (error) {
-      toast.error("Make sure you remove all items from the store first.");
+      toast.error("Make sure you removed all categories using this billboard first.");
     } finally {
       setLoading(false);
     }
@@ -122,10 +128,10 @@ export const BillboardForm: React.FC<billboardFormPorps> = ({ intialData }) => {
               <FormItem>
                 <FormLabel>Background Image</FormLabel>
                 <FormControl>
-                  <Input
-                    disabled={loading}
-                    placeholder="Billboard label"
-                    {...field}
+                  <ImageUpload value={field.value ? [field.value] : []}
+                  disabled={loading}
+                  onChange={(url) => field.onChange(url)}
+                  onRemove={() => field.onChange("")}
                   />
                 </FormControl>
                 <FormMessage />

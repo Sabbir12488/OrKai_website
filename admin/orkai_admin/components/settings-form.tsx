@@ -1,6 +1,6 @@
 "use client";
 
-import { Trash } from "lucide-react";
+import { Trash2 } from "lucide-react";
 import { store } from "@prisma/client";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
@@ -93,7 +93,7 @@ export const SettingsForm: React.FC<settingFormPorps> = ({ intialData }) => {
           onClick={() => setOpen(true)}
         >
           Delete
-          <Trash className="h-4 mr-0 ml-2" />
+          <Trash2 className="h-4 mr-0 ml-2" />
         </Button>
       </div>
       <Separator />
