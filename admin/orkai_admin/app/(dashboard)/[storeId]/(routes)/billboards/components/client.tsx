@@ -1,12 +1,17 @@
 "use client";
 import { useParams, useRouter } from "next/navigation";
+import { Billboard } from "@prisma/client";
 
 import { Button } from "@/components/ui/button";
 import { Heading } from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
 import { Plus } from "lucide-react";
 
-export const BillboardCilent = () => {
+interface billboardCilentProps {
+  data: Billboard[];
+}
+
+export const BillboardCilent: React.FC<billboardCilentProps> = ({ data }) => {
   const router = useRouter();
   const param = useParams();
 
@@ -14,7 +19,7 @@ export const BillboardCilent = () => {
     <>
       <div className="flex items-center justify-between">
         <Heading
-          title="Billboard (0)"
+          title={`Billboard (${data.length})`}
           description="Manage billboards for your store"
         />
         <Button

@@ -23,8 +23,6 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { useParams, useRouter } from "next/navigation";
 import { AlartModel } from "@/components/models/alart-model";
-import { ApiAlart } from "@/components/ui/api-alart";
-import { useOrigine } from "@/hooks/use-origin";
 import ImageUpload from "@/components/ui/image-upload";
 
 interface billboardFormPorps {
@@ -43,7 +41,7 @@ export const BillboardForm: React.FC<billboardFormPorps> = ({ intialData }) => {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const origin = useOrigine();
+
 
   const title = intialData ? "Edit billboard" : "New billboard";
   const description = intialData ? "Edit a billboard" : "Add a new billboard";
