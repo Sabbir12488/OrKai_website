@@ -27,12 +27,10 @@ export const ApiAlart: React.FC<apiAlartProps> = ({
   description,
   variant = "public",
 }) => {
-
-  const onCopy = () =>
-  {
+  const onCopy = () => {
     navigator.clipboard.writeText(description);
-    toast.success("Copied in your clipboard");
-  }
+    toast.success("Copied to your clipboard");
+  };
 
   return (
     <Alert>
