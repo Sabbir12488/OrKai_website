@@ -42,7 +42,6 @@ export const BillboardForm: React.FC<billboardFormPorps> = ({ intialData }) => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
-
   const title = intialData ? "Edit billboard" : "New billboard";
   const description = intialData ? "Edit a billboard" : "Add a new billboard";
   const toastMessage = intialData
@@ -61,14 +60,17 @@ export const BillboardForm: React.FC<billboardFormPorps> = ({ intialData }) => {
   const onSubmit = async (values: billboardFormValues) => {
     try {
       setLoading(true);
-      if(intialData) {
-        await axios.patch(`/api/${params.storeId}/billboards/${params.billboardId}`, values);
-      }else{
+      if (intialData) {
+        await axios.patch(
+          `/api/${params.storeId}/billboards/${params.billboardId}`,
+          values
+        );
+      } else {
         await axios.post(`/api/${params.storeId}/billboards`, values);
       }
-      
+
       router.refresh();
-      router.push(`/${params.storeId}/billboards`)
+      router.push(`/${params.storeId}/billboards`);
       toast.success(toastMessage);
     } catch (error) {
       toast.error("Something went wrong.");
@@ -80,12 +82,16 @@ export const BillboardForm: React.FC<billboardFormPorps> = ({ intialData }) => {
   const onDelete = async () => {
     try {
       setLoading(true);
-      await axios.delete(`/api/${params.storeId}/billboards/${params.billboardId}`);
+      await axios.delete(
+        `/api/${params.storeId}/billboards/${params.billboardId}`
+      );
       router.refresh();
-      router.push("/");
+      router.push(`${params.storeId}/billboard`);
       toast.success("Billboard deleted.");
     } catch (error) {
-      toast.error("Make sure you removed all categories using this billboard first.");
+      toast.error(
+        "Make sure you removed all categories using this billboard first."
+      );
     } finally {
       setLoading(false);
     }
@@ -127,10 +133,11 @@ export const BillboardForm: React.FC<billboardFormPorps> = ({ intialData }) => {
               <FormItem>
                 <FormLabel>Background Image</FormLabel>
                 <FormControl>
-                  <ImageUpload value={field.value ? [field.value] : []}
-                  disabled={loading}
-                  onChange={(url) => field.onChange(url)}
-                  onRemove={() => field.onChange("")}
+                  <ImageUpload
+                    value={field.value ? [field.value] : []}
+                    disabled={loading}
+                    onChange={(url) => field.onChange(url)}
+                    onRemove={() => field.onChange("")}
                   />
                 </FormControl>
                 <FormMessage />
