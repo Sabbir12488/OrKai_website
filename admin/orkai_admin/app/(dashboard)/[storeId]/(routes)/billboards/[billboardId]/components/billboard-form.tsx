@@ -86,7 +86,7 @@ export const BillboardForm: React.FC<billboardFormPorps> = ({ intialData }) => {
         `/api/${params.storeId}/billboards/${params.billboardId}`
       );
       router.refresh();
-      router.push(`${params.storeId}/billboard`);
+      router.push(`/${params.storeId}/billboards`);
       toast.success("Billboard deleted.");
     } catch (error) {
       toast.error(
@@ -169,7 +169,6 @@ export const BillboardForm: React.FC<billboardFormPorps> = ({ intialData }) => {
           </Button>
         </form>
       </Form>
-      <Separator />
     </>
   );
 };
