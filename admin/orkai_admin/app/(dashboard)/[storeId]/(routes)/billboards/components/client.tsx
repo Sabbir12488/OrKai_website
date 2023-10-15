@@ -16,7 +16,7 @@ interface billboardCilentProps {
 
 export const BillboardCilent: React.FC<billboardCilentProps> = ({ data }) => {
   const router = useRouter();
-  const param = useParams();
+  const param = useParams();//somthinggg
 
   return (
     <>
